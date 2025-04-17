@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>État Mental & Émotionnel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+    #resultat {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e0f7fa;
+      border-left: 5px solid #00796b;
+    }
+  </style>
+</head>
+<body>
+  <h1>Évalue ton état mental</h1>
+
+  <label for="humeur">Comment te sens-tu aujourd'hui ?</label>
+  <select id="humeur">
+    <option value="heureux">Heureux(se)</option>
+    <option value="triste">Triste</option>
+    <option value="stressé">Stressé(e)</option>
+    <option value="fatigué">Fatigué(e)</option>
+  </select>
+
+  <label for="sommeil">As-tu bien dormi ?</label>
+  <select id="sommeil">
+    <option value="oui">Oui</option>
+    <option value="non">Non</option>
+  </select>
+
+  <label for="commentaire">Un petit mot pour décrire ta journée :</label>
+  <textarea id="commentaire" rows="3"></textarea>
+
+  <button onclick="evaluerEtat()">Évaluer</button>
+
+  <div id="resultat"></div>
+
+  <script>
+    function evaluerEtat() {
+      const humeur = document.getElementById('humeur').value;
+      const sommeil = document.getElementById('sommeil').value;
+      const commentaire = document.getElementById('commentaire').value;
+      let message = "";
+
+      if (humeur === "heureux" && sommeil === "oui") {
+        message = "Tu sembles bien aujourd'hui ! Continue comme ça.";
+      } else if (humeur === "triste" || sommeil === "non") {
+        message = "Prends un moment pour toi. Essaie de te reposer ou de parler à quelqu’un de confiance.";
+      } else if (humeur === "stressé") {
+        message = "Respire profondément. Une courte pause ou une marche peut faire du bien.";
+      } else {
+        message = "Chaque jour est différent. L’important, c’est de prendre soin de toi.";
+      }
+
+      document.getElementById('resultat').innerHTML = `
+        <h3>Résultat :</h3>
+        <p>${message}</p>
+        <p><strong>Ton mot du jour :</strong> ${commentaire || "(aucun)"}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
